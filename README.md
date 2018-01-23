@@ -15,13 +15,20 @@ Option B: Without Lutris:
 3. Open the extracted folder in a terminal and:  
 
 ```shell
-  chmod a+x install.sh
+  chmod a+x warframe.sh
 ```
 
-## Optionally update the install directory in install.sh - if you do so, update uninstall.sh as well
-
+For a full install use the following command
 ```shell
-  ./install.sh
+  ./warframe.sh --install --install-system
+```
+
+`--install` creates the wine prefix and all the needed configuration files. `--install-system` installes the script in the system path and adds menu entries.
+
+
+if you wish to use a different location for the wine bottle or the `Downloaded` folder specify them together with the `--install-system` flag. The installed script will use the user overrides. No need to manually edit the script
+```shell
+  ./warframe.sh --install-system --download-dir ~/Warframe/Downloaded --wine-prefix-dir ~/Warframe/wine_prefix
 ```
 
 4. Launch the game via any of the following methods:  
@@ -38,9 +45,34 @@ Option B: Without Lutris:
 This applies to non-lutris only: 
 
 ```shell
-  chmod a+x uninstall.sh
-  ./uninstall.sh
+  ./warframe.sh --uninstall-system
 ```
+or use the installed script
+```shell
+  warframe --uninstall-system
+```
+
+## 32bit vs 64bit
+
+On default the script prepares and uses a 64bit wine environment. To use a 32bit environment add the `--32bit` flag
+```shell
+  ./warframe.sh --install --install-system --32bit
+  warframe --32bit
+  warframe --uninstall-system --32bit
+```
+
+## Debugging and hacking the wine environment
+To start `winecfg` to check or modify some options by hand use the flag `--winecfg`
+```shell
+  warframe --winecfg
+```
+
+To start `regedit` to check or modify some options by hand use the flag `--regedit`
+```shell
+  warframe --regedit
+```
+
+To tell the script to print each executed command use the flag `--verbose`.
 
 ## Technical notes:  
 Known issues:
