@@ -435,8 +435,13 @@ fi
 # actually start the game
 #############################################################
 if [ "$start_game" = true ] ; then
+	if [ "$verbose" = true ] ; then
+		export WINEDEBUG=""
+	else
+		export WINEDEBUG=-all
+	fi
 	#WINEDEBUG=-all wine64 "${LAUNCHER}"
 	# start MSI file instead of launcher, because launcher.exe can't replace itself under wine and loops forever
-	WINEDEBUG=-all $WINE msiexec /i "${MSI}"
+	$WINE msiexec /i "${MSI}"
 fi
 
