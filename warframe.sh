@@ -7,7 +7,7 @@ function print_synopsis {
 	echo ""
 	echo "options:"
 	echo "    --download-dir      override default download_dir variable"
-	echo "    --wine-prefix-dir   override default wine_prefix_base variable"
+	echo "    --wine-prefix       override default wine_prefix_base variable"
 	echo "    --winecfg           start winecfg with the current wine bottle"
 	echo "    --regedit           start regedit with the current wine bottle"
 	echo "    -w, --winetricks    install packages to wine bottle, don't launch game"
@@ -38,7 +38,7 @@ function print_synopsis {
 wine_prefix_base="/home/$USER/Games/Warframe/wine_prefix" 
 
 # specify the download folder, where all the game files are
-wine_prefix_base="/home/$USER/Games/Warframe/Downloaded" 
+download_dir="/home/$USER/Games/Warframe/Downloaded"
 
 # Video RAM of your GPU
 video_memory_size=2048
