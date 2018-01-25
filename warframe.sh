@@ -8,6 +8,8 @@ function print_synopsis {
 	echo "options:"
 	echo "    --download-dir      override default download_dir variable"
 	echo "    --wine-prefix       override default wine_prefix_base variable"
+	echo "    --video-ram         override default video_memory_size variable"
+	echo "    --email             override default user_email variable"
 	echo "    --winecfg           start winecfg with the current wine bottle"
 	echo "    --regedit           start regedit with the current wine bottle"
 	echo "    -w, --winetricks    install packages to wine bottle, don't launch game"
@@ -74,6 +76,24 @@ while [[ $# -gt 0 ]]; do
 			exit 1
 		fi
 		download_dir="$2"
+		shift # past argument
+		;;
+		--video-ram)
+		if [ -z "$2" ]; then
+			echo "option '$key' needs a value"
+			print_synopsis
+			exit 1
+		fi
+		video_memory_size="$2"
+		shift # past argument
+		;;
+		--email)
+		if [ -z "$2" ]; then
+			echo "option '$key' needs a value"
+			print_synopsis
+			exit 1
+		fi
+		user_email="$2"
 		shift # past argument
 		;;
 		--winecfg)
@@ -327,6 +347,8 @@ if [ "$do_install_bin" = true ] ; then
 	# replace default values with the overridden ones
 	sed -i '/^wine_prefix_base=/s#.*#'"wine_prefix_base=\"${wine_prefix_base}\"#" "${tmp_bin_file}"
 	sed -i '/^download_dir=/s#.*#'"download_dir=\"${download_dir}\"#" "${tmp_bin_file}"
+	sed -i '/^video_memory_size=/s#.*#'"video_memory_size=\"${video_memory_size}\"#" "${tmp_bin_file}"
+	sed -i '/^user_email=/s#.*#'"user_email=\"${user_email}\"#" "${tmp_bin_file}"
 	echo "installing this script as '${system_bin_file}'"
 	# install script in search path
 	sudo cp "$tmp_bin_file" "$system_bin_file"
